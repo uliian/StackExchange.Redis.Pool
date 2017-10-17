@@ -1,4 +1,6 @@
 using System;
+using System.Linq;
+using System.Threading.Tasks;
 using Microsoft.Extensions.DependencyInjection;
 using StackExchange.Redis;
 using StackExchange.Redis.Pool;
@@ -20,18 +22,42 @@ namespace StackEcchange.Redis.Pool.Test
             
         }
 
-        [Fact]
-        public void Test1()
+        [Theory]
+        [InlineData(0)]
+        [InlineData(1)]
+        [InlineData(2)]
+        [InlineData(3)]
+
+        public void SyncTest(int x)
         {
             using (var conn = provider.GetService<PooledConnectionMultiplexer>())
             {
                 var db = conn.ConnectionMultiplexer.GetDatabase();
-                db.StringSet("test", "test");
+                db.StringSet("test", "test"+x);
                 var value = db.StringGet("test");
                 Assert.True(value.HasValue);
-                Assert.Equal(value.ToString(),"test");
+                Assert.Equal(value.ToString(),"test"+x);
             }
             
+        }
+
+        [Fact]
+
+        public void ParallelTest()
+        {
+            void RunTest(int x)
+            {
+                using (var conn = provider.GetService<PooledConnectionMultiplexer>())
+                {
+                    var db = conn.ConnectionMultiplexer.GetDatabase();
+                    db.StringSet("test" + x, "test" + x);
+                    var value = db.StringGet("test"+x);
+                    Assert.True(value.HasValue);
+                    Assert.Equal(value.ToString(), "test" + x);
+                }
+            }
+
+            Enumerable.Range(0,1000).AsParallel().WithDegreeOfParallelism(10).ForAll(RunTest);
         }
     }
 }
