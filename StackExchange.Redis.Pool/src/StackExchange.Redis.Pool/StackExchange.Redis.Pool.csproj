@@ -6,6 +6,7 @@
 
   <ItemGroup>
     <PackageReference Include="CodeProject.ObjectPool" Version="3.2.1" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="1.1.1" />
     <PackageReference Include="StackExchange.Redis" Version="1.2.6" />
   </ItemGroup>
 
