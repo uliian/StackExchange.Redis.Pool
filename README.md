@@ -2,6 +2,10 @@
 
 For StackExchange.Redis connection pool
 
+## Build Status
+
+[![Build Status](https://travis-ci.org/uliian/SQLinq.svg?branch=master)](https://travis-ci.org/uliian/SQLinq)
+
 ## How to use
 
 ### Install
