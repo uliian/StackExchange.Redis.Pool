@@ -1,6 +1,7 @@
 using System;
 using System.Linq;
 using System.Threading.Tasks;
+using CodeProject.ObjectPool;
 using Microsoft.Extensions.DependencyInjection;
 using StackExchange.Redis;
 using StackExchange.Redis.Pool;
@@ -17,9 +18,9 @@ namespace StackEcchange.Redis.Pool.Test
         public PooledConnectionMultiplexerTest()
         {
             IServiceCollection collection = new ServiceCollection();
-            collection.AddRedisConnectionPool("localhost:6388", 10);
+            collection.AddRedisConnectionPool("localhost:6379", 10);
             provider = collection.BuildServiceProvider();
-            
+
         }
 
         [Theory]
@@ -30,15 +31,13 @@ namespace StackEcchange.Redis.Pool.Test
 
         public void SyncTest(int x)
         {
-            using (var conn = provider.GetService<PooledConnectionMultiplexer>())
-            {
-                var db = conn.ConnectionMultiplexer.GetDatabase();
-                db.StringSet("test", "test"+x);
-                var value = db.StringGet("test");
-                Assert.True(value.HasValue);
-                Assert.Equal(value.ToString(),"test"+x);
-            }
-            
+            var conn = provider.GetService<IConnectionMultiplexer>();
+
+            var db = conn.GetDatabase();
+            db.StringSet("test", "test" + x);
+            var value = db.StringGet("test");
+            Assert.True(value.HasValue);
+            Assert.Equal(value.ToString(), "test" + x);
         }
 
         [Fact]
@@ -47,17 +46,36 @@ namespace StackEcchange.Redis.Pool.Test
         {
             void RunTest(int x)
             {
-                using (var conn = provider.GetService<PooledConnectionMultiplexer>())
+                var conn = provider.GetService<IConnectionMultiplexer>();
+
+                var db = conn.GetDatabase();
+                db.StringSet("test" + x, "test" + x);
+                var value = db.StringGet("test" + x);
+                Assert.True(value.HasValue);
+                Assert.Equal(value.ToString(), "test" + x);
+            }
+
+            Enumerable.Range(0, 1000).AsParallel().WithDegreeOfParallelism(10).ForAll(RunTest);
+        }
+
+        [Fact]
+
+        public void ParallelTest2()
+        {
+            var pool = this.provider.GetService<ObjectPool<PooledConnectionMultiplexer>>();
+            void RunTest(int x)
+            {
+                using (var conn = pool.GetObject())
                 {
-                    var db = conn.ConnectionMultiplexer.GetDatabase();
+                    var db = conn.GetDatabase();
                     db.StringSet("test" + x, "test" + x);
-                    var value = db.StringGet("test"+x);
+                    var value = db.StringGet("test" + x);
                     Assert.True(value.HasValue);
                     Assert.Equal(value.ToString(), "test" + x);
                 }
+                
             }
-
-            Enumerable.Range(0,1000).AsParallel().WithDegreeOfParallelism(10).ForAll(RunTest);
+            Enumerable.Range(0, 1000).AsParallel().WithDegreeOfParallelism(10).ForAll(RunTest);
         }
     }
 }

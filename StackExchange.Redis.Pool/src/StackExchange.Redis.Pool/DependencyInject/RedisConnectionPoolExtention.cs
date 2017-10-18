@@ -12,8 +12,16 @@ namespace StackExchange.Redis.Pool.DependencyInject
         {
             serviceCollection.AddSingleton<ObjectPool<PooledConnectionMultiplexer>>(srv =>
                 new ObjectPool<PooledConnectionMultiplexer>(poolSize, () => new PooledConnectionMultiplexer(config)));
-            serviceCollection.AddScoped<PooledConnectionMultiplexer>(srv => srv.GetRequiredService<ObjectPool<PooledConnectionMultiplexer>>().GetObject());
+            serviceCollection.AddScoped<IConnectionMultiplexer>(srv => srv.GetRequiredService<ObjectPool<PooledConnectionMultiplexer>>().GetObject());
+        }
 
+        public static void AddRedisConnectionPool(this IServiceCollection serviceCollection, Action<ConfigurationOptions> configAction, int poolSize)
+        {
+            var config = new ConfigurationOptions();
+            configAction(config);
+            serviceCollection.AddSingleton<ObjectPool<PooledConnectionMultiplexer>>(srv =>
+                new ObjectPool<PooledConnectionMultiplexer>(poolSize, () => new PooledConnectionMultiplexer(config)));
+            serviceCollection.AddScoped<IConnectionMultiplexer>(srv => srv.GetRequiredService<ObjectPool<PooledConnectionMultiplexer>>().GetObject());
         }
 
         public static void AddRedisConnectionPool(this IServiceCollection serviceCollection, string configsStr, int poolSize)
