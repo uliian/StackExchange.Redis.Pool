@@ -4,7 +4,7 @@ For StackExchange.Redis connection pool
 
 ## Build Status
 
-[![Build Status](https://travis-ci.org/uliian/SQLinq.svg?branch=master)](https://travis-ci.org/uliian/SQLinq)
+[![Build Status](https://travis-ci.org/uliian/StackExchange.Redis.Pool.svg?branch=master)](https://travis-ci.org/uliian/StackExchange.Redis.Pool)
 
 ## How to use
 
