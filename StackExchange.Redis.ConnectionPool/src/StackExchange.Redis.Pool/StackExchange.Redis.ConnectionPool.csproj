@@ -2,6 +2,13 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard1.6</TargetFramework>
+    <Authors>ULiiAn</Authors>
+    <Company />
+    <Description>StackExchange.Redis‘s ConnectionPool.</Description>
+    <PackageProjectUrl>https://github.com/uliian/StackExchange.Redis.Pool</PackageProjectUrl>
+    <PackageIconUrl>https://raw.githubusercontent.com/uliian/StackExchange.Redis.Pool/master/Pool%202.png</PackageIconUrl>
+    <PackageLicenseUrl />
+    <Copyright>ULiiAn</Copyright>
   </PropertyGroup>
 
   <ItemGroup>
