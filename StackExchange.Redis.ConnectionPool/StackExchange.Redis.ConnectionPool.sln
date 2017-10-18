@@ -1,0 +1,39 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.27004.2002
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StackExchange.Redis.ConnectionPool", "src\StackExchange.Redis.Pool\StackExchange.Redis.ConnectionPool.csproj", "{2ED5DDB0-2E06-4AEB-A00C-1814C5B777F7}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{2C78368C-3E41-4577-9D60-73C88E2AA637}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{242B6F33-A9CD-419A-B141-835CBDBB8A3E}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StackEcchange.Redis.ConnectionPool.IntergrationTest", "test\StackEcchange.Redis.Pool.Test\StackEcchange.Redis.ConnectionPool.IntergrationTest.csproj", "{5E4EEC6B-5FE1-48E4-BD0E-A3B35ECF7A73}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{2ED5DDB0-2E06-4AEB-A00C-1814C5B777F7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2ED5DDB0-2E06-4AEB-A00C-1814C5B777F7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2ED5DDB0-2E06-4AEB-A00C-1814C5B777F7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2ED5DDB0-2E06-4AEB-A00C-1814C5B777F7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5E4EEC6B-5FE1-48E4-BD0E-A3B35ECF7A73}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5E4EEC6B-5FE1-48E4-BD0E-A3B35ECF7A73}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5E4EEC6B-5FE1-48E4-BD0E-A3B35ECF7A73}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5E4EEC6B-5FE1-48E4-BD0E-A3B35ECF7A73}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{2ED5DDB0-2E06-4AEB-A00C-1814C5B777F7} = {2C78368C-3E41-4577-9D60-73C88E2AA637}
+		{5E4EEC6B-5FE1-48E4-BD0E-A3B35ECF7A73} = {242B6F33-A9CD-419A-B141-835CBDBB8A3E}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {9A8EA8F5-5994-43D3-BA2F-08F58D4CB234}
+	EndGlobalSection
+EndGlobal
