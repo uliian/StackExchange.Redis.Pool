@@ -1,0 +1,15 @@
+language: csharp
+mono: none
+dotnet: 2.0.0
+dist: trusty
+cache: ccache
+script:
+- apt-get install redis-server
+- cd StackExchange.Redis.ConnectionPool
+- dotnet restore
+- dotnet build -c Release
+- cd test/StackEcchange.Redis.Pool.Test
+- dotnet test
+- cd ../../src/StackExchange.Redis.Pool
+- dotnet pack -c Release -o $PWD
+- dotnet nuget push ./*.nupkg -k $nugetKey -s https://www.nuget.org/api/v2/package
