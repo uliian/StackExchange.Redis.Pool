@@ -9,6 +9,7 @@
     <PackageIconUrl>https://raw.githubusercontent.com/uliian/StackExchange.Redis.Pool/master/Pool%202.png</PackageIconUrl>
     <PackageLicenseUrl />
     <Copyright>ULiiAn</Copyright>
+    <Version>1.0.1</Version>
   </PropertyGroup>
 
   <ItemGroup>

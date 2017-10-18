@@ -6,6 +6,13 @@ For StackExchange.Redis connection pool
 
 [![Build Status](https://travis-ci.org/uliian/StackExchange.Redis.Pool.svg?branch=master)](https://travis-ci.org/uliian/StackExchange.Redis.Pool)
 
+## Why?
+
+solve timeout prolem:
+
+Was there a big request preceding several small requests to the Redis that timed out?
+<https://github.com/StackExchange/StackExchange.Redis/blob/master/docs/Timeouts.md>
+
 ## How to use
 
 ### Install
